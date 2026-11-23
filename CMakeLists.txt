@@ -22,6 +22,20 @@ else()
 endif()
 message("FreeRTOS path: ${FREERTOS_PATH}")
 
+if (DEFINED UNITY_PATH)
+# Already defined, e.g. -D flag
+elseif(DEFINED ENV{UNITY_PATH})
+# Defined in an environment variable
+    set(UNITY_PATH $ENV{UNITY_PATH})
+else()
+# Default to the submodule
+    set(UNITY_PATH lib/unity)
+endif()
+
+if(DEFINED ENV{OPENOCD_PATH})
+    set(OPENOCD_PATH $ENV{OPENOCD_PATH})
+endif()
+
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 # ====================================================================================
 cmake_minimum_required(VERSION 3.13)
@@ -38,6 +52,9 @@ include(${PICO_SDK_PATH}/pico_sdk_init.cmake)
 
 # This imports the library configuration for FreeRTOS
 include(${FREERTOS_PATH}/portable/ThirdParty/GCC/RP2040/FreeRTOS_Kernel_import.cmake)
+
+# This sets up the unity library. They don't provide a library export, so it's defined locally.
+include(unity.cmake)
 
 # This defines your project name, you can name it anything you want.
 project(lab11 C CXX ASM)
