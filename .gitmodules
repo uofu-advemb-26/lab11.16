@@ -1,0 +1,9 @@
+[submodule "pico sdk"]
+	path = lib/pico-sdk
+	url = https://github.com/raspberrypi/pico-sdk.git
+[submodule "freertos"]
+	path = lib/freertos
+	url = https://github.com/FreeRTOS/FreeRTOS-Kernel.git
+[submodule "unity"]
+	path = lib/unity
+	url = https://github.com/ThrowTheSwitch/Unity.git
